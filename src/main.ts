@@ -1,5 +1,6 @@
 // Apify SDK - toolkit for building Apify Actors (Read more at https://docs.apify.com/sdk/js/).
 import {
+  ApiPagination,
   Company,
   CompanyShort,
   createLinkedinScraper,
@@ -89,10 +90,23 @@ const state: {
   scrapedItems: 0,
 };
 
-const pushItem = async (item: Company | CompanyShort) => {
+const pushItem = async ({
+  item,
+  pagination,
+}: {
+  item: Company | CompanyShort;
+  pagination: ApiPagination | null;
+}) => {
   console.info(`Scraped company ${item.linkedinUrl || item?.universalName || item?.id}`);
   state.scrapedItems += 1;
   let pushResult: { eventChargeLimitReached: boolean } | null = null;
+
+  item = {
+    ...item,
+    _meta: {
+      pagination,
+    },
+  } as (Company | CompanyShort) & { _meta: { pagination: ApiPagination | null } };
 
   if (scraperMode === ScraperMode.SHORT) {
     pushResult = await Actor.pushData(item, 'short-company');
@@ -129,8 +143,23 @@ const scraper = createLinkedinScraper({
 
 const scrapeParams: Omit<ScrapeLinkedinCompaniesParams, 'query'> = {
   outputType: 'callback',
-  onItemScraped: async ({ item }) => {
-    return pushItem(item);
+  onItemScraped: async ({ item, pagination }) => {
+    return pushItem({ item, pagination });
+  },
+  onPageFetched: async ({ page, data }) => {
+    if (page === 1) {
+      if (data?.status === 429) {
+        console.error('Too many requests');
+      } else if (data?.pagination) {
+        console.info(
+          `Found ${data.pagination.totalElements} companies total for input ${JSON.stringify(query)}`,
+        );
+      }
+    }
+
+    console.info(
+      `Scraped search page ${page}. Found ${data?.elements?.length} profiles on the page.`,
+    );
   },
   scrapeDetails: scraperMode === ScraperMode.FULL,
   takePages: input.takePages || 20,
