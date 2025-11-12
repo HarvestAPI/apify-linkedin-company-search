@@ -8,7 +8,7 @@
       "type": "string",
       "enum": ["short", "full"],
       "description": "Choose the mode for scraping LinkedIn companies. The Short mode provides basic information, while the Full mode includes full detailed company data.",
-      "prefill": "Full"
+      "prefill": "full"
     },
     "maxItems": {
       "title": "Maximum number of companies to scrape",
