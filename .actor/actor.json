@@ -1,0 +1,12 @@
+{
+  "actorSpecification": 1,
+  "name": "linkedin-company-search",
+  "title": "LinkedIn Company Search Scraper",
+  "description": "Search for LinkedIn companies with filters and extract detailed company information",
+  "version": "0.0",
+  "minMemoryMbytes": 128,
+  "maxMemoryMbytes": 256,
+  "usesStandbyMode": false,
+  "input": "./input_schema.json",
+  "dockerfile": "./Dockerfile"
+}
