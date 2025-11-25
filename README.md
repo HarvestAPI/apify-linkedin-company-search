@@ -15,6 +15,9 @@ Our powerful tool helps you search LinkedIn Companies and filter by locations, c
 - (optional) List of locations (e.g., `New York`, `San Francisco`, `London`). Please note that LinkedIn does not always understand your text queries. For example for "UK" query it will apply "Ukraine" location, so you should use "United Kingdom" in this case. Try this out first in the location filter input of LinkedIn search at `https://www.linkedin.com/search/results/people/?geoUrn=%5B%22103644278%22%5D` - we will use the first suggestion from the autocomplete popup when you type your location.
 - (optional) List of LinkedIn industry IDs (e.g., `4`, `5`, `6`). You can find the full list of IDs in the [LinkedIn Industries](https://github.com/HarvestAPI/linkedin-industry-codes-v2/blob/main/linkedin_industry_code_v2_all_eng_with_header.csv).
 - (optional) `maxItems` - Maximum number of companies to scrape for all queries. If you set to 0, it will scrape all available items or up to 1000 items per search query (LinkedIn doesn't allow to extract more than 1000 per one query).
+  
+Note: For scraping companies by company URLs, please use our [Linkedin Company Scraper](https://apify.com/harvestapi/linkedin-company)   
+Find more Linkedin scraping actors [https://apify.com/harvestapi](https://apify.com/harvestapi)  
 
 ### Sample output data
 
