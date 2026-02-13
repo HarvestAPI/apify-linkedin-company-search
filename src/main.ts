@@ -142,6 +142,7 @@ const scraper = createLinkedinScraper({
 });
 
 const scrapeParams: Omit<ScrapeLinkedinCompaniesParams, 'query'> = {
+  scrapePeopleTab: true,
   outputType: 'callback',
   onItemScraped: async ({ item, pagination }) => {
     return pushItem({ item, pagination });
