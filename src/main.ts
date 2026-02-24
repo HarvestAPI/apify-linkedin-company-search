@@ -129,7 +129,6 @@ const scraper = createLinkedinScraper({
     'x-apify-actor-build-id': actorBuildId!,
     'x-apify-memory-mbytes': String(memoryMbytes),
     'x-apify-actor-max-paid-dataset-items': String(actorMaxPaidDatasetItems) || '0',
-    'x-apify-user-id': userId!,
     'x-apify-user-is-paying': String(isPaying),
     'x-apify-user-is-paying-2': process.env.APIFY_USER_IS_PAYING || '',
     'x-apify-max-total-charge-usd': String(pricingInfo.maxTotalChargeUsd),
