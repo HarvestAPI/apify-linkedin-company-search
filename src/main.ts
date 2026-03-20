@@ -60,7 +60,12 @@ const query: SearchLinkedinCompaniesParams = {
 for (const key of Object.keys(query) as (keyof typeof query)[]) {
   if (Array.isArray(query[key]) && query[key].length) {
     (query[key] as string[]) = query[key]
-      .map((v) => (v || '').replace(/,/g, ' ').replace(/\s+/g, ' ').trim())
+      .map((v) =>
+        String(v || '')
+          .replace(/,/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim(),
+      )
       .filter((v) => v && v.length);
   }
   if (!query[key] || (Array.isArray(query[key]) && !(query[key] as string[]).length)) {
